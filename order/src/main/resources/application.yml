@@ -1,0 +1,29 @@
+# Configuration Port
+server:
+  port: 8081
+
+# Configuration Thymeleaf
+spring:
+  thymeleaf:
+    prefix: classpath:/templates
+    suffix: .html
+    cache: false
+
+  # Configuration Devtools
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enable: false
+
+  # Configuration PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/orderdb
+    username: orderuser
+    password: 1234
+
+# Configuration mybatis
+# mybatis:
+#   mapper-locations: classpath:sqlmap/**/*.xml
+#   configuration:
+#     map-underscore-to-camel-case: true
