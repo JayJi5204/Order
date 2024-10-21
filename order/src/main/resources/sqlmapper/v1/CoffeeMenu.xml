@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.order.v1.dao.MenuDao">
+    <!-- 전체 상품 조회 -->
+    <select id="doListAll" resultType="map">
+        SELECT no, coffee, kind, price,
+        to_timestamp(#{reg_day},'YYYY-MM-DD')as reg_day,
+        to_timestamp(#{mod_day},'YYYY-MM-DD')as mod_day
+        FROM coffee_menu
+    </select>
+
+    <!-- 개별 상품 조회 -->
+    <select id="doListOne" resultType="map">
+        SELECT no, coffee, kind, price,
+        to_timestamp(#{reg_day},'YYYY-MM-DD')as reg_day,
+        to_timestamp(#{mod_day},'YYYY-MM-DD')as mod_day
+        FROM coffee_menu
+        where no = CAST(#{no} as INTEGER)
+    </select>
+
+    <!-- 상품 등록-->
+    <insert id="doInsert">
+        INSERT INTO coffee_menu(coffee, kind, price)
+        VALUES (#{coffee},#{kind},CAST(#{price} as INTEGER))
+    </insert>
+
+    <!-- 상품 수정 -->
+    <update id="doUpdate">
+        update coffee_menu
+        coffee = #{coffee},
+        kind = #{kind},
+        price = CAST(#{price} as INTEGER),
+        where no = CAST(#{no} as INTEGER)
+    </update>
+
+    <!-- 상품 삭제 -->
+    <delete id="doDelete">
+        delete from coffee_menu where no = CAST(#{no} as INTEGER)
+    </delete>
+
+    <!-- 상품 검색 -->
+    <select id="doSearch" resultType="map">
+        SELECT no, coffee, kind, price, reg_day, mod_day
+        FROM coffee_menu
+        WHERE 1=1
+        AND reg_day >= to_timestamp(#{startDate}, 'YYYY-MM-DD')
+        AND reg_day &lt; to_timestamp(#{endDate}, 'YYYY-MM-DD')
+        <if test="coffee != 'ALL'">
+            AND coffee LIKE #{coffee} || '%'
+        </if>
+        <if test="kind != 'ALL'">
+            AND kind = #{kind}
+        </if>
+    </select>
+
+
+
+
+</mapper>

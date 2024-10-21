@@ -11,7 +11,7 @@
 <body>
 
 <!-- 헤더 위치 -->
-<th:block th:replace="/comm/header :: headerFragment"></th:block>
+<th:block th:replace="/v1/comm/header :: headerFragment"></th:block>
 
 <div id="main" style="font-size:large; alignment: center; padding: 10px 50px ">
   <table>
@@ -24,11 +24,10 @@
       <p>
         <hr>
       <ul style="list-style-type:square;">
-        <li>개발툴 : 인텔리J</li>
-        <li>Java 버전 : 1.8</li>
-        <li>View  : 타임리프</li>
-        <li>DBMS : MaridDB</li>
-        <li>Mapper : 마이바티스</li>
+        <li>소개 : 상품 주문 사이트</li>
+        <li>진행기간 : 2024.10.18 ~ </li>
+        <li>기술스택 : SpringBoot, Spring Security, PostgreSQL, MyBatis, Thymeleaf, Redis, Kafka, GitHub</li>
+        <li>GitHub : <a th:href="@{https://github.com/JayJi5204/Order}">https://github.com/JayJi5204/Order</a> </li>
       </ul>
       </p>
       </td>
@@ -40,7 +39,7 @@
 </div>
 
 <!-- 푸터 위치 -->
-<th:block th:replace="/comm/footer :: footerFragment"></th:block>
+<th:block th:replace="/v1/comm/footer :: footerFragment"></th:block>
 
 </body>
 </html>

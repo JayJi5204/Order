@@ -23,7 +23,7 @@ spring:
     password: 1234
 
 # Configuration mybatis
-# mybatis:
-#   mapper-locations: classpath:sqlmap/**/*.xml
-#   configuration:
-#     map-underscore-to-camel-case: true
+mybatis:
+  mapper-locations: classpath:sqlmapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
