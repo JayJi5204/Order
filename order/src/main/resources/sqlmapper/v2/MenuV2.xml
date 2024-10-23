@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.order.v2.dao.MenuDaoV2">
+    <!-- 전체 상품 조회 -->
+    <select id="doListAll" resultType="com.order.order.v2.vo.MenuVo">
+        SELECT no, coffee, kind, price,
+        to_char(reg_day, 'YYYY-MM-DD') AS reg_day,
+        to_char(mod_day, 'YYYY-MM-DD') AS mod_day
+        FROM coffee_menu
+    </select>
+
+
+    <!-- 개별 상품 조회 -->
+    <select id="doListOne" resultType="map">
+        SELECT no, coffee, kind, price,
+        to_char(reg_day, 'YYYY-MM-DD') AS reg_day,
+        to_char(mod_day, 'YYYY-MM-DD') AS mod_day
+        FROM coffee_menu
+        where no = CAST(#{no} as INTEGER)
+    </select>
+
+    <!-- 상품 등록-->
+    <insert id="doInsert">
+        INSERT INTO coffee_menu(coffee, kind, price)
+        VALUES (#{coffee},#{kind},CAST(#{price} as INTEGER))
+    </insert>
+
+    <!-- 상품 수정 -->
+    <update id="doUpdate">
+        UPDATE coffee_menu
+        SET
+        coffee = #{coffee},
+        kind = #{kind},
+        price = CAST(#{price} AS INTEGER)
+        WHERE no = CAST(#{no} AS INTEGER)
+    </update>
+
+    <!-- 상품 삭제 -->
+    <delete id="doDelete">
+        delete from coffee_menu where no = CAST(#{no} as INTEGER)
+    </delete>
+
+    <!-- 상품 검색 -->
+    <select id="doSearch" resultType="com.order.order.v2.vo.MenuVo">
+        SELECT no, coffee, kind, price,
+        to_char(reg_day, 'YYYY-MM-DD') AS reg_day,
+        to_char(mod_day, 'YYYY-MM-DD') AS mod_day
+        FROM coffee_menu
+        WHERE 1=1
+        AND reg_day >= to_date(#{startDate}, 'YYYY-MM-DD')
+        AND reg_day &lt; to_date(#{endDate}, 'YYYY-MM-DD') + interval '1 day'
+        <if test="coffee != 'ALL'">
+            AND coffee LIKE '%' || #{coffee} || '%'
+        </if>
+        <if test="kind != 'ALL'">
+            AND kind = #{kind}
+        </if>
+    </select>
+
+    <!-- 상품 가격 수정 -->
+    <update id="doUpdatePrice">
+        update coffee_menu set
+        price = CAST(#{price} as INTEGER)
+        <where>
+            <foreach item="item" index="index" collection="chkList"
+                     open="no in (" separator="," close=")" nullable="true">
+                CAST(#{item} as INTEGER)
+            </foreach>
+        </where>
+    </update>
+</mapper>

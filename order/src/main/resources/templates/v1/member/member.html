@@ -13,7 +13,7 @@
 <body>
 
 <!-- 헤더 위치 -->
-<th:block th:replace="/v1/comm/header :: headerFragment"></th:block>
+<th:block th:replace="~{/v1/comm/header :: headerFragment}"></th:block>
 
 <div id="main" style="font-size:large; text-align: center; ">
 
@@ -85,7 +85,8 @@
 </div>
 
 <!-- 푸터 위치 -->
-<th:block th:replace="/v1/comm/footer :: footerFragment"></th:block>
+<th:block th:replace="~{/v1/comm/footer :: footerFragment}"></th:block>
+
 
 </body>
 </html>
