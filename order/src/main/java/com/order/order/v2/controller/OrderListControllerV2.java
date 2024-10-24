@@ -19,6 +19,7 @@ public class OrderListControllerV2 {
     @Autowired
     OrderListServiceV2 orderListServiceV2;
 
+    // 주문 목록 화면
     @RequestMapping("/order")
     public String doOrder(Model model) {
         List<OrderListVo> list = orderListServiceV2.doListAll();
@@ -26,6 +27,7 @@ public class OrderListControllerV2 {
         return "/v2/order/order";
     }
 
+    // 조회하기
     @PostMapping("/order_search")
     public String postDoSearch(@RequestParam("start_date") String startDate, @RequestParam("end_date") String endDate, @RequestParam(value = "item", defaultValue = "ALL") String item, @RequestParam(value = "name", defaultValue = "ALL") String name, Model model) {
         List<OrderListVo> list = orderListServiceV2.doSearch(startDate, endDate, item, name);

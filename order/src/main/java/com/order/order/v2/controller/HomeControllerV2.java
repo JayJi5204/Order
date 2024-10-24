@@ -11,12 +11,10 @@ public class HomeControllerV2 {
 
     @GetMapping("/home")
     public String getHome(){
-
         return "/v2/home/home";
     }
     @PostMapping("/home")
     public String postHome(){
-
         return "/v2/home/home";
     }
 }

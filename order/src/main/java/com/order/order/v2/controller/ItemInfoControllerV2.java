@@ -20,6 +20,7 @@ public class ItemInfoControllerV2 {
     @Autowired // IoC 컨테이너에서 가져옴(재사용), Service에 의존한다(Dependency)
     ItemInfoServiceV2 itemInfoServiceV2;
 
+    // 상품 목록 화면
     @RequestMapping("/item")
     public String doItem(Model model) {
         List<ItemInfoVo> list = itemInfoServiceV2.doListAll();

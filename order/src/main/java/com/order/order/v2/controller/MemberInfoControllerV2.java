@@ -19,6 +19,7 @@ public class MemberInfoControllerV2 {
     @Autowired
     MemberInfoServiceV2 memberInfoServiceV2;
 
+    // 회원 목록 화면
     @RequestMapping("/member")
     public String doMember(Model model) {
         List<MemberInfoVo> list = memberInfoServiceV2.doListAll();
@@ -26,6 +27,7 @@ public class MemberInfoControllerV2 {
         return "/v2/member/member";
     }
 
+    // 조회하기
     @PostMapping("/member_search")
     public String postDoSearch(@RequestParam("start_date") String startDate, @RequestParam("end_date") String endDate, @RequestParam(value = "name", defaultValue = "ALL") String name, Model model) {
         List<MemberInfoVo> list = memberInfoServiceV2.doSearch(startDate, endDate, name);

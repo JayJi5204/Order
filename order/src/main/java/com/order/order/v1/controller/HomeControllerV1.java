@@ -9,15 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/v1")
 public class HomeControllerV1 {
 
-
-    @GetMapping("/home")
+    // 메인 화면
+    @RequestMapping("/home")
     public String getHome(){
-
-        return "/v1/home/home";
-    }
-    @PostMapping("/home")
-    public String postHome(){
-
         return "/v1/home/home";
     }
 }
