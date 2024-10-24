@@ -2,12 +2,10 @@ package com.order.order.v2.vo;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
-public class MenuVo {
+public class ItemInfoVo {
     private String no;
-    private String coffee;
+    private String item;
     private String kind;
     private String price;
     private String reg_day;

@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html lang="ko"  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Coffee Menu</title>
+    <title>item item</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="/css/comm.css">
-    <link rel="stylesheet" type="text/css" href="/css/coffee.css">
+    <link rel="stylesheet" type="text/css" href="/css/item.css">
 
 </head>
 <body>
@@ -18,16 +18,16 @@
 <div id="main" style="font-size:large; text-align: center; ">
 
     <div id="search" style="height: 150px;padding: 15px; font-size: small; width: 90%; margin-left: auto;  margin-right: auto;">
-        <h3>[ Coffee menu Management <span style="font-size:30px;">&#9749;</span> ] <th:block th:text="${hello}"></th:block>  </h3>
+        <h3>[ item item Management <span style="font-size:30px;">&#9749;</span> ] <th:block th:text="${hello}"></th:block>  </h3>
 
-        <form name="fm_menu" autocomplete="on" action="/v1/menu_search" method="post">
+        <form name="fm_item" autocomplete="on" action="/v1/item_search" method="post">
             <fieldset>
 
                 <legend> [검색조건] </legend>
                 <label>등록기간</label><input type="date" id="start_date" name="start_date" min="2020-01-01" max="2030-12-31">
                 - <input type="date" id="end_date" name="end_date" min="2020-01-01" max="2030-12-31">
                 &nbsp;&nbsp;
-                <label>메뉴명</label> <input type="text" id="coffee" name="coffee">
+                <label>메뉴명</label> <input type="text" id="item" name="item">
                 &nbsp;&nbsp;
                 <label>종류</label> <select id="kind" name="kind">
                 <option value="ALL">전체</option>
@@ -37,15 +37,12 @@
             </select>
 
                 &nbsp;&nbsp;<input type="submit" value="조회" style="width: 80px;height: 30px;font-weight: bold; font-size: medium">
-                &nbsp;&nbsp;<button style="width: 80px;height: 30px;font-weight: bold; font-size: medium"><a href="/v1/menu_insert">등록</a></button>
+                &nbsp;&nbsp;<button style="width: 80px;height: 30px;font-weight: bold; font-size: medium"><a href="/v1/item_insert">등록</a></button>
                 &nbsp;&nbsp;<button type="button" id="IdUpdateAll" style="width: 80px;height: 30px;font-weight: bold; font-size: medium" onclick="onModify()">가격수정</button>
                 <!-- <a href="javascript:loadDocArray()">test</a> -->
                 <!--        <label>CheckBox : </label><span id="idCheckBox"></span>-->
             </fieldset>
-
         </form>
-
-
     </div>
 
     <form name="formTable" id="IdFormTable" method="post" action="/v1/updatePrice">
@@ -63,25 +60,20 @@
                 <th>삭제</th>
             </tr>
             </thead>
-
-
+            
             <tbody id="t_body">
             <!--- 데이타 출력 부분 -->
             <tr th:each="list : ${list}">
-                <td><input type="checkbox" name="chkCoffeeNo" th:value="${list.get('no')}"></td>
+                <td><input type="checkbox" name="chkItemNo" th:value="${list.get('no')}"></td>
                 <th th:text="${list.get('no')}">커피No</th>
-                <td th:text="${list.get('coffee')}">메뉴명</td>
+                <td th:text="${list.get('item')}">메뉴명</td>
                 <td th:text="${list.get('kind')}">종류</td>
                 <td th:text="${list.get('price')}">가격</td>
                 <td th:text="${#dates.format(list.get('reg_day'), 'yyyy-MM-dd')}">등록일</td>
                 <td th:text="${#dates.format(list.get('mod_day'), 'yyyy-MM-dd')}">수정일</td>
-                <td><a th:href="@{/v1/menu_update(no=${list.get('no')})}">수정</a></td>
-                <td><a th:href="@{/v1/menu_delete(no=${list.get('no')})}">삭제</a></td>
+                <td><a th:href="@{/v1/item_update(no=${list.get('no')})}">수정</a></td>
+                <td><a th:href="@{/v1/item_delete(no=${list.get('no')})}">삭제</a></td>
             </tr>
-
-
-
-
             </tbody>
         </table>
         <input type="hidden" name="hidden_price">

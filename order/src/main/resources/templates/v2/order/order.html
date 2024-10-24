@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Coffee Order List</title>
+    <title>item Order List</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <link href="/css/comm.css" rel="stylesheet" type="text/css">
-    <link href="/css/coffee.css" rel="stylesheet" type="text/css">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -18,7 +18,7 @@
 
     <div id="search"
          style="height: 150px;padding: 15px; font-size: small; width: 90%; margin-left: auto;  margin-right: auto;">
-        <h3>[ Coffee Order List <span style="font-size:30px;">&#128722;</span> ]</h3>
+        <h3>[ item Order List <span style="font-size:30px;">&#128722;</span> ]</h3>
 
         <form action="/v2/order_search" autocomplete="on" method="post" name="fm_order">
             <fieldset>
@@ -27,7 +27,7 @@
                                           type="date">
                 - <input id="end_date" max="2030-12-31" min="2020-01-01" name="end_date" type="date">
                 &nbsp;&nbsp;
-                <label>메뉴명</label> <input id="coffee" name="coffee" type="text">
+                <label>메뉴명</label> <input id="item" name="item" type="text">
                 &nbsp;&nbsp;
                 <label>고객명</label> <input id="name" name="name" type="text">
                 </select>
@@ -58,10 +58,10 @@
         <tr class="tr_td" th:each="list : ${list}">
             <td><input name="chkOrderNo" th:value="${list.getNo()}" type="checkbox"></td>
             <th th:text="${list.getNo()}">주문번호</th>
-            <td th:text="${list.getCoffee_no()}">커피No</td>
-            <td th:text="${list.getCoffee()}">메뉴명</td>
+            <td th:text="${list.getItem_no()}">커피No</td>
+            <td th:text="${list.getItem()}">메뉴명</td>
             <td th:text="${#numbers.formatInteger(list.getPrice(),0,'COMMA')}">가격</td>
-            <td th:text="${list.getCust_id()}">고객ID</td>
+            <td th:text="${list.getMember_id()}">고객ID</td>
             <td th:text="${list.getName()}">고객명</td>
             <td th:text="${list.getReg_day()}">등록일</td>
         </tr>

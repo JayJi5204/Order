@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <link href="/css/comm.css" rel="stylesheet" type="text/css">
-    <link href="/css/coffee.css" rel="stylesheet" type="text/css">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -48,7 +48,7 @@
         <tbody id="t_body">
         <tr class="tr_td" th:each="list : ${list}">
             <td><input name="chkMemberNo" th:value="${list.getNo()}" type="checkbox"></td>
-            <th th:text="${list.getCust_id()}">고객ID</th>
+            <th th:text="${list.getMember_id()}">고객ID</th>
             <td th:text="${list.getName()}">고객명</td>
             <td th:text="${list.getEmail()}">이메일</td>
             <td th:text="${list.getRole()}">권한</td>

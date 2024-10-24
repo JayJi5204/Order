@@ -3,12 +3,12 @@ package com.order.order.v2.vo;
 import lombok.Data;
 
 @Data
-public class OrderVo {
+public class OrderListVo {
     private String no;
-    private String coffee_no;
-    private String coffee;
+    private String item_no;
+    private String item;
     private String price;
-    private String cust_id;
+    private String member_id;
     private String name;
     private String reg_day;
 }
