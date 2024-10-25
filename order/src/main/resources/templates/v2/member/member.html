@@ -36,7 +36,6 @@
     <table class="table">
         <thead>
         <tr class="tr_td">
-            <th>Chk</th>
             <th>고객ID</th>
             <th>고객명</th>
             <th>이메일</th>
@@ -47,7 +46,6 @@
 
         <tbody id="t_body">
         <tr class="tr_td" th:each="list : ${list}">
-            <td><input name="chkMemberNo" th:value="${list.getNo()}" type="checkbox"></td>
             <th th:text="${list.getMember_id()}">고객ID</th>
             <td th:text="${list.getName()}">고객명</td>
             <td th:text="${list.getEmail()}">이메일</td>
@@ -64,7 +62,7 @@
     const startNow = new Date();
     const endNow = new Date();
     const startTime = new Date(startNow.setDate(startNow.getDate() - 30));
-    const endTime = new Date(endNow.setDate(endNow.getDate() + 1));
+    const endTime = new Date(endNow.setHours(endNow.getHours() + 9));
     document.getElementById("start_date").value= startTime.toISOString().slice(0,10);
     document.getElementById("end_date").value= endTime.toISOString().slice(0,10);
 </script>

@@ -63,9 +63,10 @@ public class ItemInfoControllerV2 {
 
     // 조회하기
     @PostMapping("/item_search")
-    public String postDoSearch(@RequestParam("start_date") String startDate, @RequestParam("end_date") String endDate, @RequestParam(value = "coffee", defaultValue = "ALL") String item, @RequestParam("kind") String kind, Model model) {
+    public String postDoSearch(@RequestParam("start_date") String startDate, @RequestParam("end_date") String endDate, @RequestParam(value = "item", defaultValue = "ALL") String item, @RequestParam("kind") String kind, Model model) {
         List<ItemInfoVo> list = itemInfoServiceV2.doSearch(startDate, endDate, item, kind);
         model.addAttribute("list", list);
+        log.info(list);
         return "/v2/item/item";
     }
 
@@ -74,6 +75,7 @@ public class ItemInfoControllerV2 {
     public String postDoUpdatePrice(@RequestParam("chkItemNo") List<String> chkList, @RequestParam("hidden_price") String price) {
         if (chkList != null) {
             itemInfoServiceV2.doUpdatePrice(chkList, price);
+            itemInfoServiceV2.doUpdateInsert(chkList,price);
         }
         return "redirect:/v2/item";
     }

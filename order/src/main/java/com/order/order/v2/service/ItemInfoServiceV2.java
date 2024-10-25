@@ -47,4 +47,8 @@ public class ItemInfoServiceV2 {
     public void doUpdatePrice(List<String> chkList, String price) {
         itemInfoDaoV2.doUpdatePrice(chkList, price);
     }
+
+    public void doUpdateInsert(List<String> chkList, String price) {
+        itemInfoDaoV2.doUpdatePrice(chkList, price);
+    }
 }
