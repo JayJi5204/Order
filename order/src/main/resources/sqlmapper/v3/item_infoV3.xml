@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.order.v3.dao.ItemInfoDaoV3">
+    <!-- 전체 상품 조회 -->
+    <select id="doListAll" resultType="com.order.order.v3.vo.ItemInfoVo">
+        SELECT no, item, kind, price,
+        to_char(reg_day, 'YYYY-MM-DD') AS reg_day,
+        to_char(mod_day, 'YYYY-MM-DD') AS mod_day
+        FROM item_info
+    </select>
+
+
+    <!-- 개별 상품 조회 -->
+    <select id="doListOne" resultType="map">
+        SELECT no, item, kind, price,
+        to_char(reg_day, 'YYYY-MM-DD') AS reg_day,
+        to_char(mod_day, 'YYYY-MM-DD') AS mod_day
+        FROM item_info
+        where no = CAST(#{no} as INTEGER)
+    </select>
+
+    <!-- 상품 등록-->
+    <insert id="doInsert">
+        INSERT INTO item_info(item, kind, price)
+        VALUES (#{item},#{kind},CAST(#{price} as INTEGER))
+    </insert>
+
+    <!-- 상품 수정 -->
+    <update id="doUpdate">
+        UPDATE item_info
+        SET
+        item = #{item},
+        kind = #{kind},
+        price = CAST(#{price} AS INTEGER)
+        WHERE no = CAST(#{no} AS INTEGER)
+    </update>
+
+    <!-- 상품 삭제 -->
+    <delete id="doDelete">
+        delete from item_info where no = CAST(#{no} as INTEGER)
+    </delete>
+
+    <!-- 상품 검색 -->
+    <select id="doSearch" resultType="com.order.order.v3.vo.ItemInfoVo">
+        SELECT no, item, kind, price,
+        to_char(reg_day, 'YYYY-MM-DD') AS reg_day,
+        to_char(mod_day, 'YYYY-MM-DD') AS mod_day
+        FROM item_info
+        WHERE 1=1
+        AND reg_day >= to_date(#{startDate}, 'YYYY-MM-DD')
+        AND reg_day &lt; to_date(#{endDate}, 'YYYY-MM-DD') + interval '1 day'
+        <if test="item != 'ALL'">
+            AND item LIKE '%' || #{item} || '%'
+        </if>
+        <if test="kind != 'ALL'">
+            AND kind = #{kind}
+        </if>
+    </select>
+
+    <!-- 상품 가격 수정 -->
+    <update id="doUpdatePrice">
+        update item_info set
+        price = CAST(#{price} as INTEGER)
+        <where>
+            <foreach item="item" index="index" collection="chkList"
+                     open="no in (" separator="," close=")" nullable="true">
+                CAST(#{item} as INTEGER)
+            </foreach>
+        </where>
+    </update>
+</mapper>

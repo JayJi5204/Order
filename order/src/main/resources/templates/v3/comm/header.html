@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headerFragment">
+    <div class="topnav">
+        <a href="/v3/home">Home</a>
+        <a href="/v3/itemlist">상품목록</a>
+        <a href="/v3/item" th:if="${session.ss_role == 'ADMIN'}">상품관리</a>
+        <a href="/v3/order" th:if="${session.ss_role == 'ADMIN'}">주문내역</a>
+        <a href="/v3/member" th:if="${session.ss_role == 'ADMIN'}">고객정보</a>
+        <a th:href="${session.ss_id != null} ? '/v3/login/logout' : '/v3/login/form'"
+           th:text="${session.ss_id != null} ? '로그아웃' : '로그인' ">
+        </a>
+    </div>
+</th:block>
+</html>

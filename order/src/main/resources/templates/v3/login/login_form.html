@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>로그인</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="/css/comm.css">
+    <link rel="stylesheet" type="text/css" href="/css/item.css">
+
+    <script src="/js/jquery-3.7.1.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+
+</head>
+<body>
+
+<!-- 헤더 위치 -->
+<th:block th:replace="/v3/comm/header :: headerFragment"></th:block>
+
+<h3 style="text-align:center;">[ 고객명 <span style="font-size:30px;">&#128378;</span> ]
+    <span style="color: red">
+        <th:block th:text="${message}"></th:block>
+    </span></h3>
+<p></p>
+
+<form name="fm_member" autocomplete="on" action="/v3/login/login_exe" method="post">
+    <fieldset style="text-align:center; width: 500px; margin: auto ">
+        <legend style="font-size: large; " >[로그인]</legend>
+
+        <div id="LoginForm" style="font-size:medium; font-weight: bold; text-align: center;">
+            <div style="height: 40px">
+                <label>ID &nbsp; : </label>
+                <input id="input_id" type="text" name="id" placeholder="아이디를 입력해 주세요.">
+            </div>
+            <div>
+                <label>PW : </label>
+                <input type="password" name="pw" placeholder="비밀번호를 입력해 주세요.">
+            </div>
+            <p></p>
+            <input type="submit" id="idSubmit" value="LogIn" style="width: 300px;height: 30px;font-weight: bold; font-size: medium">
+        </div>
+    </fieldset>
+</form>
+<!--푸터위치-->
+<th:block th:replace="/v3/comm/footer :: footerFragment"></th:block>
+
+
+<script>
+    // Jquery 영역
+    $(document).ready(function(){
+
+        // Login 버튼 클릭 시 실행 구문
+        $("#idSubmit").click(function (){
+            // 쿠키 체크
+            if($.cookie('M_id') == undefined) {
+                // 값이 없다면 쿠키 생성
+                $.cookie('M_id', $("#input_id").val() , {expires: 100}); // 100일
+            }else{
+                // 값이 있다면 현재 입력 값 지정
+                $.cookie('M_id', $("#input_id").val());
+            }
+        });
+
+        // 쿠키 값이 있다면 입력
+        if($.cookie('M_id') != undefined) {
+            $("#input_id").val($.cookie("M_id"));
+        }
+
+    });
+</script>
+
+</body>
+</html>

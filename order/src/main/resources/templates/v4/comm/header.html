@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headerFragment">
+    <div class="topnav">
+        <a href="/v4/home">Home</a>
+        <a href="/v4/item">상품관리</a>
+        <a href="/v4/order">주문내역</a>
+        <a href="/v4/member">고객정보</a>
+        <a th:href="${session.ss_id != null} ? '/v4/login/logout' : '/v4/login/form'"
+           th:text="${session.ss_id != null} ? '로그아웃' : '로그인' ">
+        </a>
+    </div>
+</th:block>
+</html>
