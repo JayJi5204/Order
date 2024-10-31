@@ -23,11 +23,11 @@ public class LoginControllerv3 {
     LoginServiceV3 loginServiceV3;
 
     @GetMapping("/form")
-    public String doLoginForm(Model model,HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        String name=(String)session.getAttribute("ss_name");
+    public String doLoginForm(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String name = (String) session.getAttribute("ss_name");
 
-        model.addAttribute("name",name);
+        model.addAttribute("name", name);
         return "/v3/login/login_form";
     }
 
@@ -59,7 +59,7 @@ public class LoginControllerv3 {
                 session.setAttribute("ss_email", memberInfoVo.getEmail());
                 session.setAttribute("ss_role", memberInfoVo.getRole());
 
-                return "/v3/home/home";
+                return "/v3/login/login_form";
             } else {
                 msg = "비밀번호가 잘못되었습니다.";
             }
@@ -69,7 +69,7 @@ public class LoginControllerv3 {
     }
 
     @GetMapping("/logout")
-    public String doLogOut(HttpServletRequest request){
+    public String doLogOut(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         session.invalidate();
         return "redirect:/";
